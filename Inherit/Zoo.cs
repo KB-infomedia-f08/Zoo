@@ -14,7 +14,34 @@
         enclosures[0].animals = [new Pinguin("Bobby",10, 90,true),
                                  new Pinguin("Zoey", 4, 75, false),
                                  new Pinguin("Mira", 5, 40, false)];
-        PrintEnclosures();
+        bool isRunning = true;
+        while (isRunning)
+        {
+            Console.Clear();
+            PrintEnclosures();
+            Console.WriteLine("[1] View an enclousre \n" +
+                              "[2] Add an animal \n" +
+                              "[3] Exit \n");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    int enclosureId = SelectEnclosure();
+                    enclosures[enclosureId].View();
+                    break;
+                case "2":
+                    AddAnimal();
+                    break;
+                case "3":
+                    //TODO Save to file
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+
+        
     }
     public void PrintEnclosures()
     {
@@ -24,7 +51,6 @@
         }
     }
     //*Gör valet av djur dynamisk
-    //Gör idiot säker 
     public void AddAnimal()
     {
         Console.WriteLine("Select type of animal\n[1] Pinguin\n[2] Lion");
@@ -40,21 +66,33 @@
         }
         if(temp != null)
         {
-            //optimisera valet av inhängnader
-            Console.WriteLine("Select enclosure [1] [2] [3]");
-            switch (Console.ReadLine()) 
+            enclosures[SelectEnclosure()].animals.Add(temp);
+        }
+    }
+
+    public int SelectEnclosure()
+    {
+        Console.Write("Select enclosure ");
+        for (int i = 0; i < enclosures.Length; i++)
+        {
+            Console.Write($"[{i + 1}] ");
+        }
+        int enclosureId = 0;
+        bool okResult = false;
+        while (!okResult)
+        {
+            okResult = int.TryParse(Console.ReadLine(), out enclosureId);
+            if (okResult && (enclosureId > 0 && enclosureId <= 3))
             {
-                case "1":
-                    enclosures[0].animals.Add(temp);
-                    break;
-                case "2":
-                    enclosures[2].animals.Add(temp);
-                    break;
-                case "3":
-                    enclosures[3].animals.Add(temp);
-                    break;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Not an acceptable number");
+                okResult = false;
             }
         }
+        return enclosureId - 1;
     }
 
     /*
@@ -65,6 +103,5 @@
      * 
      * Ladda in och spara djur och inhängnader till fil
      * 
-     * Lägg till ett till djur
      */
 }
