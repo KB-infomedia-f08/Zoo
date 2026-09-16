@@ -98,9 +98,6 @@
     /*
      * Lista på funktioner att lägga till
      * ta bort djur
-     * redigera djur
-     * se specifika djur i en detaljerad vy (lägg i Enclosure.cs)
-     * 
      * Ladda in och spara djur och inhängnader till fil
      * 
      */
