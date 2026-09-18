@@ -1,10 +1,11 @@
-﻿abstract class Animal
+﻿
+
+abstract class Animal
 {
     public string Name { get; set; }
     public int Age { get; set; }
     public int Wellbeing { get; set; }
     public List<string> attributes = ["Name", "Age", "Wellbeing"];
-
     public Animal(string name, int age, int wellbeing)
     {
         Name = name;
@@ -26,5 +27,13 @@
         return Name + " : " + GetType().Name;
     }
 
-    public abstract void Edit();
+    public virtual void Edit()
+    {
+        Console.Clear();
+        for (int i = 0; i < attributes.Count; i++)
+        {
+            Console.WriteLine($"[{i + 1}] " + attributes[i]);
+        }
+        Console.WriteLine("Select attribute to edit");
+    }
 }

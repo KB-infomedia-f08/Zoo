@@ -1,8 +1,11 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿
+
+using Newtonsoft.Json;
 
 class Pinguin : Animal
 {
     bool IsOnLand {  get; set; }
+    [JsonConstructor]
     public Pinguin(string name, int age, int wellbeing, bool isOnLand) : base(name, age, wellbeing)
     {
         IsOnLand = isOnLand;
@@ -24,13 +27,8 @@ class Pinguin : Animal
     }
     public override void Edit()
     {
-        Console.Clear();
-        for (int i = 0; i < attributes.Count; i++)
-        {
-            Console.WriteLine($"[{i + 1}] " + attributes[i]);
-        }
-        Console.WriteLine("Select attribute to edit");
-        switch (Console.ReadLine()) 
+        base.Edit();
+        switch (Console.ReadLine())
         {
             case "1":
                 Name = Console.ReadLine();

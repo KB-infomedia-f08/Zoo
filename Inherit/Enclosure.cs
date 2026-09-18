@@ -8,6 +8,13 @@
         animals = new List<Animal>();
     }
 
+    public Enclosure(List<Animal> animals, int size, int popularity)
+    {
+        this.animals = animals;
+        Size = size;
+        Popularity = popularity;
+    }
+
     public void View()
     {
         bool isViewing = true;
